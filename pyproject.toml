@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wwdl"
+version = "0.1.0"
+description = "Predictability of wastewater microbiome time series"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pandas", "scikit-learn", "anndata", "pyyaml", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["pytest", "jupyter", "papermill"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

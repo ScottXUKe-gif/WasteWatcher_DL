@@ -1,0 +1,8 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+# data is copied in deliberately but is large; track the CSV, not the h5ad
+data/raw/*.h5ad
+# predictions stay on gibbs but are too large for git
+experiments/*/predictions/*.npz
