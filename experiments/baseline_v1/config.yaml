@@ -1,0 +1,39 @@
+# ADR-001 baseline experiment. Do not edit after the run without a new ADR.
+data: data/raw/nhv_filtered.h5ad
+taxon_set: primary          # primary = prevalence >= 0.5 in first 20 weeks; all = every taxon
+primary_weeks: 20
+primary_min_prevalence: 0.5
+min_train: 20
+horizons: [1, 2, 4, 6]
+subsets:
+  top_k: 500
+  active_prevalence: 0.8
+models:
+  - persistence
+  - train_mean
+  - rolling_mean_4
+  - rolling_mean_8
+  - ewma
+  - mean_revert_shared
+  - mean_revert_taxon
+  - ridge_ar1
+  - ridge_ar2
+  - ridge_ar3
+  - pca_var2
+  - pca_var4
+  - pca_var8
+  - pls_var
+  - ridge_ar1_env_lag
+  - ridge_ar1_env_oracle
+shuffle_models: [mean_revert_taxon, ridge_ar1, pca_var4, pls_var]
+interval_models: [mean_revert_taxon, ridge_ar1]
+interval_levels: [0.5, 0.8, 0.9]
+seed: 0
+references: [persistence, rolling_mean_4]
+decision:
+  horizon: 1
+  subset: all
+  reference: rolling_mean_4
+  min_skill: 0.05
+  min_win_rate: 0.70
+  shuffle_tolerance: 0.05
